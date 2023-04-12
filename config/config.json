@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "api_backend",
+    "database": "E_BOOKS",
     "host": "127.0.0.1",
     "port": "3309",
     "dialect": "mysql"
