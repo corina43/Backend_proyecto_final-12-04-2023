@@ -1,15 +1,12 @@
-const { Usuarios } = require('../models');
+const models = require('../models');
 const {
   assertValidPasswordService,
   assertEmailIsValidService,
   assertEmailIsUniqueService,
   createUserService,
   encryptPasswordService,
-  generateToken,
-
+  generateToken
 } = require('../services/AuthServices');
-require('dotenv').config();
-const jsonwebtoken = require('jsonwebtoken');
 
 const authRegisterController = async (req, res) => {
   const body = req.body;
@@ -55,7 +52,7 @@ const authLoginController = async (req, res) => {
   const { email, password } = req.body;
   try {
     // Buscar el usuario por su email
-    const usuarioEncontrado = await Usuarios.findOne({
+    const usuarioEncontrado = await models.Usuarios.findOne({
       where: { email: email },
     });
 
@@ -72,26 +69,12 @@ const authLoginController = async (req, res) => {
       return;
     }
 
-
-
     // Crear un JSON Web Token y entregárselo al usuario
-    const secret = process.env.JWT_SECRET;
+    const token = generateToken(usuarioEncontrado);
 
-    if (secret.length < 10) {
-      throw new Error("JWT_SECRET no está configurado");
-    }
-
-    const jwt = jsonwebtoken.sign(
-      {
-        email: usuarioEncontrado.email,
-        id: usuarioEncontrado.id,
-        role: usuarioEncontrado.id_rol.toLowerCase(),
-      },
-      secret
-    );
     res.status(200).json({
       message: "Inicio de sesión con exito",
-      tu_token_es: jwt,
+      tu_token_es: token,
     });
   } catch (error) {
     res.send(error);
