@@ -1,5 +1,6 @@
 const express = require('express');
 // const cors = require('cors')
+const { sequelize } = require('./models/index');
 const app = express();
 
 const db = require('./db.js');
