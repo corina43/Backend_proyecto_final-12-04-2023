@@ -1,0 +1,25 @@
+const isAdmin = (req, res, next) => {
+  try {
+    const { roleId } = req;
+
+    if (roleId !== 1) {
+      return res.status(403).json({
+        success: false,
+        message: 'Acceso denegado. No tienes permiso para realizar esta acción.',
+      });
+    }
+
+    next();
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Algo salió mal.',
+      error: error.message,
+    });
+  }
+};
+
+module.exports = isAdmin;
+
+
+
