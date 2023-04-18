@@ -1,87 +1,180 @@
-const models = require('../models');
-const {
-  assertValidPasswordService,
-  assertEmailIsValidService,
-  assertEmailIsUniqueService,
-  createUserService,
-  encryptPasswordService,
-  generateToken
-} = require('../services/AuthServices');
+const AuthController = {};
+const { Usuarios } = require('../models');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const usuarios = require('../models/usuarios');
 
-const authRegisterController = async (req, res) => {
-  const body = req.body;
+// const usuariosController = {};
 
-  // Verificar que la contraseña tenga una estructura válida
-  try {
-    assertValidPasswordService(body.password);
-  } catch (error) {
-    console.error(error);
-    res.status(400).send(`Contraseña inválida, ${error.message}`);
-    return;
-  }
+// AuthController.createUserProfile = async (req, res) => {
+//     try {
+       
+//         const { nombre, apellido, email, password, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
+//         console.log(req,body);
+//         if (!password) {
+//             return res.status(506).json({
+//                 success: false,
+//                 message: "Debe proporcionar una contraseña"
+//             });
+//         }
 
-  // Verificar que el email tenga una estructura válida
-  try {
-    assertEmailIsValidService(body.email);
-  } catch (error) {
-    console.error(error);
-    res.status(400).send(`Email inválido, ${error.message}`);
-    return;
-  }
+//         const encryptedPassword = bcrypt.hashSync(password, 10);
 
-  // Verificar que el email no esté registrado previamente
-  try {
-    assertEmailIsUniqueService(body.email);
-  } catch (error) {
-    console.error(error);
-    res.status(400).send(`El email ya está registrado`);
-    return;
-  }
+//         if (nombre === "" || apellido === "" || email === "" || password === "") {
+//             return res.status(506).json({
+//                 success: false,
+//                 message: "Debe completar todos los campos"
+//             });
+//         } else if (!/.{8,}$/.test(password)) {
+//             return res.status(507).json({
+//                 success: false,
+//                 message: "Su contraseña debe contener al menos ocho caracteres."
+//             });
+//         } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+//             return res.status(508).json({
+//                 success: false,
+//                 message: "Su contraseña debe contener al menos una letra y un número."
+//             });
+//         }
 
-  // Crear el nuevo usuario
-  try {
-    const usuarioCreado = await createUserService(body);
-    res.status(201).json(usuarioCreado);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: error.message });
-  }
-};
+//         const newUser = await Usuarios.create({
+//             nombre: nombre,
+//             apellido: apellido,
+//             email: email,
+//             password: encryptedPassword,
+//             fecha_nacimiento: fecha_nacimiento,
+//             ciudad: ciudad,
+//             pais: pais,
+//             generos_preferidos: generos_preferidos,
+//             biografia: biografia,
+//             id_rol: 2
+//         });
 
-const authLoginController = async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    // Buscar el usuario por su email
-    const usuarioEncontrado = await models.Usuarios.findOne({
-      where: { email: email },
-    });
+//         return res.json({
+//             success: true,
+//             message: "Usuario registrado",
+//             data: newUser
+//         });
+//     } catch (error) {
+//         return res.status(500).json({
+//             success: false,
+//             message: 'Algo salió mal',
+//             error: error.message
+//         });
+//     }
+// };
 
-    if (!usuarioEncontrado) {
-      res.status(401).json({ message: "Email incorrecto" });
-      return;
+AuthController.createUserProfile = async (req, res) => {
+    try {
+        const { nombre, apellido, email, password, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
+
+        const encryptedPassword = bcrypt.hashSync(password, 10);
+
+        if (nombre === "" || apellido === "" || email === "" || password === "" || fecha_nacimiento === "" || ciudad === "" || pais === "" || generos_preferidos=== "" || biografia=== "" ) {
+            return res.status(506).json({
+                success: false,
+                message: "Debe completar todos los campos"
+            });
+        } else if (!/.{8,}$/.test(password)) {
+            return res.status(507).json({
+                success: false,
+                message: "Su contraseña debe contener al menos ocho caracteres."
+            });
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+            return res.status(508).json({
+                success: false,
+                message: "Su contraseña debe contener al menos una letra y un número."
+            });
+        }
+
+        const newUser = await Usuarios.create({
+            nombre: nombre,
+            apellido: apellido,
+            email: email,
+            password: encryptedPassword,
+            fecha_nacimiento: fecha_nacimiento,
+            ciudad: ciudad,
+            pais: pais,
+            generos_preferidos: generos_preferidos,
+            biografia: biografia,
+            id_rol: 2
+        });
+
+        return res.json({
+            success: true,
+            message: "Usuario registrado",
+            data: newUser
+        });
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Algo salió mal',
+            error: error.message
+        });
     }
+};
 
-    // Cifrar la contraseña proporcionada y verificar que coincida con el hash en la base de datos
-    const hashedPassword = encryptPasswordService(password);
 
-    if (hashedPassword !== usuarioEncontrado.password) {
-      res.status(401).json({ message: "Contraseña o email incorrectos" });
-      return;
+
+
+
+
+
+AuthController.userLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const user = await Usuarios.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        if (!user) {
+            return res.status(501).json({
+                success: false,
+                message: 'Credenciales inválidas'
+            });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(501).json({
+                success: false,
+                message: 'Credenciales inválidas'
+            });
+        }
+
+        const token = jwt.sign(
+            {
+               usuariosnombre: usuarios.nombre, 
+              usuariosid: usuarios.id,
+              usuariosemail:usuarios.email,
+              id_rol: usuarios.id_rol
+
+
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: '300d'
+            }
+        );
+
+        return res.json({
+            success: true,
+            message: "hola usuario.",
+            data: token
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: 'Algo salió mal',
+            error: error.message
+        });
     }
-
-    // Crear un JSON Web Token y entregárselo al usuario
-    const token = generateToken(usuarioEncontrado);
-
-    res.status(200).json({
-      message: "Inicio de sesión con exito",
-      tu_token_es: token,
-    });
-  } catch (error) {
-    res.send(error);
-  }
 };
 
-module.exports = {
-  authLoginController,
-  authRegisterController,
-};
+
+module.exports = AuthController;

@@ -3,20 +3,20 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 // Servicio para verificar si la estructura de la contraseña es válida - al menos una minúscula, una mayúscula y un número, mínimo 8 caracteres
-const assertValidPasswordService = (pass) => {
-  if (pass.length < 8) {
+const assertValidPasswordService = (password) => {
+  if (password.length < 8) {
     throw new Error("La contraseña debe tener al menos 8 caracteres");
   }
 
-  if (!pass.match(/[a-z]/)) {
+  if (!password.match(/[a-z]/)) {
     throw new Error("La contraseña debe contener al menos una letra minúscula");
   }
 
-  if (!pass.match(/[A-Z]/)) {
+  if (!password.match(/[A-Z]/)) {
     throw new Error("La contraseña debe contener al menos una letra mayúscula");
   }
 
-  if (!pass.match(/[0-9]/)) {
+  if (!password.match(/[0-9]/)) {
     throw new Error("La contraseña debe contener al menos un número");
   }
 };
@@ -76,7 +76,7 @@ const generateToken = (usuario) => {
     email: usuario.email,
     id_rol: usuario.id_rol
   };
-  const secret = process.env.JWT_SECRET || 'tu_secreto';
+  const secret = process.env.JWT_SECRET || 'coco';
   const options = { expiresIn: '365d' };
 
   return jwt.sign(payload, secret, options);

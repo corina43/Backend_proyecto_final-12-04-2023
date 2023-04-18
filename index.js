@@ -1,7 +1,14 @@
 const express = require('express');
 // const cors = require('cors')
 const { sequelize } = require('./models/index');
+
+const bodyParser = require('body-parser');
 const app = express();
+
+app.use(bodyParser.json()); // Asegúrate de agregar esta línea
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use('/auth', AuthRoutes);
+
 
 const db = require('./db.js');
 require('dotenv').config()

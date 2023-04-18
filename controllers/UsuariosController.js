@@ -1,106 +1,75 @@
-const models = require('../models');
-const authService = require('../services/AuthServices');
+const { Usuarios } = require('../models');
+const bcrypt = require('bcrypt');
 
-const registrarUsuario = async (req, res) => {
+const UsuariosController = {};
+
+UsuariosController.verPerfil = async (req, res) => {
   try {
-    const { nombre, apellido, email, password, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
+    const usuario = await Usuarios.findByPk(req.userId);
 
-    authService.assertEmailIsValidService(email);
-    await authService.assertEmailIsUniqueService(email);
-    authService.assertValidPasswordService(password);
-
-    const usuarioCreado = await authService.createUserService({
-      nombre,
-      apellido,
-      email,
-      password,
-      fecha_registro: new Date(),
-      id_rol: 2, // Rol por defecto para nuevos usuarios (por ejemplo, id_rol: 2 para "Usuario")
-      fecha_nacimiento,
-      ciudad,
-      pais,
-      generos_preferidos,
-      biografia
-    });
-
-    res.status(201).json({
-      message: 'Usuario registrado exitosamente',
-      usuario: usuarioCreado
-    });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-const obtenerUsuarios = async (req, res) => {
-  try {
-    const usuarios = await models.Usuarios.findAll({ include: [{ model: models.Roles, as: 'Roles' }] });
-    res.status(200).json(usuarios);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener usuarios' });
-  }
-};
-
-const obtenerUsuarioPorId = async (req, res) => {
-  try {
-    const usuario = await models.Usuarios.findByPk(req.params.id, { include: [{ model: models.Roles, as: 'Roles' }] });
-    if (usuario) {
-      res.status(200).json(usuario);
-    } else {
-      res.status(404).json({ message: 'Usuario no encontrado' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener usuario' });
-  }
-};
-
-const actualizarUsuario = async (req, res) => {
-  try {
-    const { nombre, apellido, email, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
-    const usuario = await models.Usuarios.findByPk(req.params.id);
-
-    if (usuario) {
-      usuario.nombre = nombre || usuario.nombre;
-      usuario.apellido = apellido || usuario.apellido;
-      usuario.email = email || usuario.email;
-      usuario.fecha_nacimiento = fecha_nacimiento || usuario.fecha_nacimiento;
-      usuario.ciudad = ciudad || usuario.ciudad;
-      usuario.pais = pais || usuario.pais;
-      usuario.generos_preferidos = generos_preferidos || usuario.generos_preferidos;
-      usuario.biografia = biografia || usuario.biografia;
-      await usuario.save();
-
-      res.status(200).json({
-        message: 'Usuario actualizado con exito',
-        usuario: usuario
+    if (!usuario) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuario no encontrado',
       });
-    } else {
-      res.status(404).json({ message: 'Usuario no encontrado' });
     }
+
+    res.json({
+      success: true,
+      data: usuario,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error al actualizar usuario' });
+    res.status(500).json({
+      success: false,
+      message: 'Algo salió mal',
+      error: error.message,
+    });
   }
 };
-const eliminarUsuario = async (req, res) => {
+
+UsuariosController.editarPerfil = async (req, res) => {
   try {
-    const usuario = await models.Usuarios.findByPk(req.params.id);
+    const { nombre, apellido, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
 
-    if (usuario) {
-      await usuario.destroy();
-      res.status(200).json({ message: 'Usuario eliminado con exito' });
-    } else {
-      res.status(404).json({ message: 'Usuario no encontrado' });
+    const usuario = await Usuarios.findByPk(req.userId);
+
+    if (!usuario) {
+      return res.status(404).json({
+        success: false,
+        message: 'Usuario no encontrado',
+      });
     }
+
+    await usuario.update({
+      nombre: nombre || usuario.nombre,
+      apellido: apellido || usuario.apellido,
+      fecha_nacimiento: fecha_nacimiento || usuario.fecha_nacimiento,
+      ciudad: ciudad || usuario.ciudad,
+      pais: pais || usuario.pais,
+      generos_preferidos: generos_preferidos || usuario.generos_preferidos,
+      biografia: biografia || usuario.biografia,
+    });
+
+    res.json({
+      success: true,
+      message: 'Perfil actualizado correctamente',
+      data: usuario,
+    });
   } catch (error) {
-    res.status(500).json({ message: 'Error al eliminar usuario' });
+    res.status(500).json({
+      success: false,
+      message: 'Algo salió mal',
+      error: error.message,
+    });
   }
 };
 
-module.exports = {
-  registrarUsuario,
-  obtenerUsuarios,
-  obtenerUsuarioPorId,
-  actualizarUsuario,
-  eliminarUsuario
-};
+module.exports = UsuariosController;
+
+
+
+
+
+
+
 
