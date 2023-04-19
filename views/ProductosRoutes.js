@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const ProductosController = require('./controllers/ProductosController');
-
+const isAdmin = require('./middlewares/isAdmin');
 // Rutas de Productos
 
 router.post('/productos', verifyToken, isAdmin, ProductosController.createProduct);

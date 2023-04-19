@@ -5,9 +5,8 @@ const { sequelize } = require('./models/index');
 const bodyParser = require('body-parser');
 const app = express();
 
-app.use(bodyParser.json()); // Asegúrate de agregar esta línea
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use('/auth', AuthRoutes);
 
 
 const db = require('./db.js');
