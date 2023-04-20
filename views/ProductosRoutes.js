@@ -7,7 +7,7 @@ const express = require('express');
 
 // //router.post('/productos', ProductosController.createProduct);
 router.get('/', ProductosController.getAll);
-// // router.get('/productos/:id', ProductosController.getProductById);
+router.get('/:id', ProductosController.getProductById);
 // // router.put('/productos/:id', verifyToken, isAdmin, ProductosController.updateProduct);
 
  module.exports = router;

@@ -39,50 +39,16 @@ ProductosController.createProduct = async (req, res) => {
   }
 };
 
-ProductosController.getProducts = async (req, res) => {
-  try {
-    const products = await Productos.findAll();
 
-    return res.json({
-      success: true,
-      message: 'Lista de productos',
-      data: products,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Algo salió mal',
-      error: error.message,
-    });
-  }
-};
 
 ProductosController.getProductById = async (req, res) => {
-  try {
-    const { id } = req.params;
-
-    const product = await Productos.findByPk(id);
-
-    if (!product) {
-      return res.status(404).json({
-        success: false,
-        message: 'Producto no encontrado',
-      });
-    }
-
-    return res.json({
-      success: true,
-      message: 'Producto encontrado',
-      data: product,
-    });
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: 'Algo salió mal',
-      error: error.message,
-    });
-  }
+let id = req.params.id;
+let resp = await models.Productos.findAll({
+  where: {id : id}
+});
+res.send(resp);
 };
+
 
 ProductosController.updateProduct = async (req, res) => {
   try {
