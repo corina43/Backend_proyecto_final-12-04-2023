@@ -1,6 +1,13 @@
 const { Productos } = require('../models');
+const models = require('../models/index');
 
 const ProductosController = {};
+
+
+ProductosController.getAll = async (req,res) =>{
+  let resp = await models.Productos.findAll();
+  res.send(resp);
+}
 
 ProductosController.createProduct = async (req, res) => {
   try {

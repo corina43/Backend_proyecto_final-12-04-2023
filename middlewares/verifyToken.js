@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 // console.log(decoded)
 
-    req.usuario_id = decoded.usuario_id;
+    req.id_usuario = decoded.id_usuario;
     req.nombre = decoded.nombre;
     req.id_rol = decoded.id_rol;
 

@@ -1,8 +1,8 @@
 const isAdmin = (req, res, next) => {
   try {
-    const { roleId } = req;
+    const { id_rol } = req;
 
-    if (roleId !== 1) {
+    if (id_rol !== 1) {
       return res.status(403).json({
         success: false,
         message: 'Acceso denegado. No tienes permiso para realizar esta acción.',
