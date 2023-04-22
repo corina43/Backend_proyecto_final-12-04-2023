@@ -20,7 +20,7 @@ const verifyToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 // console.log(decoded)
 
-    req.id_usuario = decoded.id_usuario;
+    req.id = decoded.id;
     req.nombre = decoded.nombre;
     req.id_rol = decoded.id_rol;
 
@@ -37,4 +37,29 @@ const verifyToken = (req, res, next) => {
   };
 };
 
-module.exports = verifyToken;
+
+const isValidRole = (role) => (req, res, next) => {
+  if (req.auth?.role === role) {
+    
+    next()
+  } else {
+    res.status(403).json({ message: "You are not authorized" })
+  }
+}
+
+const isValidUser = (email) => async (req, res, next) => {
+  email = req.params.email || req.body.email
+  console.log(email)
+  console.log(req.auth.email)
+  if (req.auth?.email === email) {
+    next()
+  } else {
+    res.status(403).json({ message: "You are not authorized" })
+  }
+}
+
+module.exports = {
+  verifyToken,
+  isValidRole,
+  isValidUser
+}

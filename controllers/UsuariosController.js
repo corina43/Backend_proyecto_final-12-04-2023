@@ -1,18 +1,28 @@
 const { Usuarios } = require('../models');
 const bcrypt = require('bcrypt');
-
+const models = require('../models/index');
 const UsuariosController = {};
 
+UsuariosController.getAll = async (req,res) =>{
+  let resp = await models.Usuarios.findAll();
+  console.log(req)
+  res.send(resp);
+}
 
-UsuariosController.verUsuarios = async (req,res) =>{
+UsuariosController.verUsuarios = async (req,res) => {
+  console.log(req,"Controlador de Usuarios iniciado.")
   try{
-    const usuarios = await Usuarios.findAll();
+    console.log(req,"Controlador de Usuarios iniciado.")
+    const usuarios = await models.Usuarios.findAll();
+    console.log(usuarios);
     return res.json(
+     
       {
         success: true,
         message: 'informacion usuarios',
         data: usuarios
       }
+   
     );
   }catch (error) {
     return res.status(500).json(
@@ -25,26 +35,33 @@ UsuariosController.verUsuarios = async (req,res) =>{
   }
 };
 
+// UsuariosController.verUsuarios = async (req,res) =>{
+//   let resp = await models.Usuarios.findAll(
+//     {
+//       where: {
+//         deleted: false,
+//         id_rol: "usuarios"
+//       }
+//     }
+//   );
+//   res.send(resp)
+// };
+
 UsuariosController.verUsuariosPerfil = async (req,res) =>{
   try {
-    // console.log(req,res)
-    const id_usuario = req.id_usuario;
+    console.log(req,res)
+    const id = req.user.id;
     const usuarios = await Usuarios.findByPk(
-       id_usuario,
+     
+       user.id,
+     
       {
        
         attributes:
         {
           exclude: ["id", "password", "id_rol"]
         },
-        include:
-        {
-          models: Usuarios,
-          attributes:
-          {
-            exclude: ["id", "id_usuario"]
-          }
-        }
+        
 
       }
     );console.log(usuarios)
@@ -74,6 +91,14 @@ UsuariosController.verUsuariosPerfil = async (req,res) =>{
   }
 };
 
+UsuariosController.getInformation = async (req,res) => {
+
+  let {email } = req.params;
+  let resp = await models.Usuarios.findAll({
+    where: {email: email}
+  })
+  res.send(resp)
+};
 
 UsuariosController.editarPerfil = async (req, res) => {
   try {

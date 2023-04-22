@@ -9,5 +9,6 @@ const express = require('express');
 router.get('/', ProductosController.getAll);
 router.get('/:id', ProductosController.getProductById);
 // // router.put('/productos/:id', verifyToken, isAdmin, ProductosController.updateProduct);
-
+router.get('/genero/:genero', ProductosController.getByGenero);
+router.get('/titulo/:titulo', ProductosController.getByTitulo);
  module.exports = router;

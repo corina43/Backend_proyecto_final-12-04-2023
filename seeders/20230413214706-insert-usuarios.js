@@ -17,8 +17,7 @@ module.exports = {
         pais: 'Rumania',
         generos_preferidos: 'Literatura Clásica, Poesía',
         biografia: 'Administradora de la plataforma y amante de la lectura.',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      
       },
       {
         nombre: 'Alyna',
@@ -32,8 +31,7 @@ module.exports = {
         pais: 'Hungría',
         generos_preferidos: 'Ciencia Ficción, Fantasía',
         biografia: 'Estudiante de literatura y escritora aficionada.',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      
       },
       {
         nombre: 'Laura',
@@ -47,8 +45,7 @@ module.exports = {
         pais: 'Reino Unido',
         generos_preferidos: 'Misterio, Thriller',
         biografia: 'Editora y crítica literaria.',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+     
       },
       {
         nombre: 'Mara',
@@ -62,8 +59,7 @@ module.exports = {
         pais: 'Italia',
         generos_preferidos: 'Historia, Biografías',
         biografia: 'Profesora de historia y apasionada de la lectura.',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+     
       },
 
       {
@@ -78,8 +74,7 @@ module.exports = {
         pais: 'España',
         generos_preferidos: 'Misterio, Ciencia Ficción',
         biografia: 'Amante de la lectura y escritor en mis tiempos libres.',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+       
       },
       {
         nombre: 'Ana',
@@ -93,8 +88,7 @@ module.exports = {
         pais: 'España',
         generos_preferidos: 'Romance, Aventuras',
         biografia: 'Me encanta leer y compartir mis opiniones sobre libros.',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+      
       },
     ]);
   },
