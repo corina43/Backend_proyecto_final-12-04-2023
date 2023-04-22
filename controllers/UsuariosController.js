@@ -35,25 +35,15 @@ UsuariosController.verUsuarios = async (req,res) => {
   }
 };
 
-// UsuariosController.verUsuarios = async (req,res) =>{
-//   let resp = await models.Usuarios.findAll(
-//     {
-//       where: {
-//         deleted: false,
-//         id_rol: "usuarios"
-//       }
-//     }
-//   );
-//   res.send(resp)
-// };
+
 
 UsuariosController.verUsuariosPerfil = async (req,res) =>{
   try {
     console.log(req,res)
-    const id = req.user.id;
+    const id = req.id;
     const usuarios = await Usuarios.findByPk(
      
-       user.id,
+       id,
      
       {
        

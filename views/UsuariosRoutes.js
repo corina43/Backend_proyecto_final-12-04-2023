@@ -7,7 +7,7 @@ const isAdmin = require('../middlewares/isAdmin');
 
 // Rutas para usuarios
 
-router.get('/:email', verifyToken, UsuariosController.getInformation);
+//router.get('/:email', verifyToken, UsuariosController.getInformation);
 router.get('/profile', verifyToken, UsuariosController.verUsuariosPerfil);
 router.put('/perfil', verifyToken, UsuariosController.editarPerfil);
 router.get('/todos', verifyToken, isAdmin, UsuariosController.verUsuarios);

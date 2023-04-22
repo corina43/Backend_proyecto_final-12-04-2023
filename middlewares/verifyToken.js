@@ -21,7 +21,7 @@ const verifyToken = (req, res, next) => {
 // console.log(decoded)
 
     req.id = decoded.id;
-    req.nombre = decoded.nombre;
+    req.email = decoded.email;
     req.id_rol = decoded.id_rol;
 
 
