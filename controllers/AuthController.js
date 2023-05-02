@@ -137,17 +137,17 @@ AuthController.createUserProfile = async (req, res) => {
 
 
        
-        // if (nombre === "" || apellido === "" || email === "" || password === "" || fecha_registro === "" || fecha_nacimiento === "" || ciudad === "" || pais === "" || generos_preferidos=== "" || biografia === "") {
-        //     return res.status(506).json({
-        //         success: false,
-        //         message: "Debe completar todos los campos"
-        //     });
-        // } else if (!/.{8,}$/.test(password)) {
-        //     return res.status(507).json({
-        //         success: false,
-        //         message: "Su contraseña debe contener al menos ocho caracteres."
-        //     });
-        //}
+        if (nombre === "" || apellido === "" || email === "" || password === "" || fecha_registro === "" || fecha_nacimiento === "" || ciudad === "" || pais === "" || generos_preferidos=== "" || biografia === "") {
+            return res.status(506).json({
+                success: false,
+                message: "Debe completar todos los campos"
+            });
+        } else if (!/.{8,}$/.test(password)) {
+            return res.status(507).json({
+                success: false,
+                message: "Su contraseña debe contener al menos ocho caracteres."
+            });
+        }
        
         const encryptedPassword = bcrypt.hashSync(password, 10);
         const newUser = await Usuarios.create({

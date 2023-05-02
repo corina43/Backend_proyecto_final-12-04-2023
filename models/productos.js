@@ -52,6 +52,9 @@ module.exports = (sequelize, DataTypes) => {
       formato: {
         type: DataTypes.ENUM('mp3', 'wav', 'm4a', 'flac', 'aac'),
       },
+      poster_path: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

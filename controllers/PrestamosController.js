@@ -1,30 +1,115 @@
+
+const { Prestamos ,Usuarios } = require('../models');
+// const models = require('../models/index');
+// const db = require('../models');
 const PrestamosController = {};
 
-const models = require('../models/index');
-const db = require('../models');
 
-const obtenerPrestamosPorEmail = async (req, res) => {
+
+const ObtenerHistorialPrestamos = async (req, res) => {
+  const { id_usuario } = req.params;
   try {
-    const { email } = req.params;
-    const usuario = await db.Usuarios.findOne({ where: { email } });
-
-    if (!usuario) {
-      return res.status(404).json({ error: 'Usuario no encontrado' });
-    }
-
-    const prestamos = await db.Prestamos.findAll({
-      where: { id_usuario: usuario.id },
-      include: [{ model: db.Productos }],
+    const historialPrestamos = await Prestamos.findAll({
+      where: { id_usuario: id_usuario },
+      // include: [
+      //   { association: 'Usuarios' },
+        // { association: 'Productos' }
+      
     });
-
-    res.status(200).json(prestamos);
+    res.status(200).json({ success: true, data: historialPrestamos });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Error interno del servidor' });
+    res.status(500).json({ success: false, message: 'Error al obtener el historial de préstamos.'});
   }
 };
 
 
+// PrestamosController.getAll = async (req, res) => {
+//   let resp = await models.Prestamos.findAll();
+//   console.log(req)
+//   res.send(resp);
+// }
+
+//  const getAllPrestamos = async (req, res) => {
+//   try {
+//       let prestamosActivos = await Prestamos.findAll({
+//           include: {
+//           model: Usuarios,
+//           attributes: ['id'],
+//           },
+//           attributes: ['producto_id', 'usuario_id']
+//       });
+//           res.status(200).json({
+//           message: `These are all the appointment in the calendar`,
+//           prestamosActivos,
+//       });   
+//   } catch (error) {
+//       return res.status(500).json({
+//           success: false,
+//           message: "Ups, something were wrong",
+//           error: error.message
+//       })
+//   }
+// }
+
+
+// const ObtenerPrestamosPorEmail = async (req, res) => {
+//   try {
+//     const { email } = req.params;
+//     const usuario = await db.Usuarios.findOne({ where: { email } });
+
+//     if (!usuario) {
+//       return res.status(404).json({ error: 'Usuario no encontrado' });
+//     }
+
+//     const prestamos = await db.Prestamos.findAll({
+//       where: { id_usuario: usuario.id },
+//       include: [{ model: db.Productos }],
+//     });
+
+//     res.status(200).json(prestamos);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Error interno del servidor' });
+//   }
+// };
+
+// PrestamosController.getAllPrestamos = async (req,res) => {
+  
+//   try {
+
+//     const prestamos = await Prestamos.findAll(
+//       {
+//         include: 
+//         {
+//           model: Productos,
+//           attributes: 
+//           {
+//             exclude: ["id", "id_productos"]
+//           }
+//         },
+//         // attributes: 
+//         // {
+//         //   exclude: ["patient_id", "doctor_id"]
+//         // }      
+//       }
+//     );
+
+//     if (!prestamos) {
+//       return res.status(503).json({ message: 'Not existing appointments.' });
+//     }
+
+//     return res.json(
+//       {
+//         succes: true,
+//         message: 'Appointment found.',
+//         data: prestamos,
+//       }
+//     );
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: 'Something went wrong.' });
+//   };
+// };
 
 // Prestamo de  un producto
 // PrestamosControllers.PrestamosProductos = async (req, res) => {
@@ -69,16 +154,14 @@ const obtenerPrestamosPorEmail = async (req, res) => {
 // }
 
 
-PrestamosController.getMiPrestamos = async (req, res) => {
-    let resp = await models.Prestamos.findAll({
-      where: {
-       id: req.auth.id
-      }
-    })
-    res.status(200).json({
-      resp,
-      message: "Here are your loans"
-    })
-  }
 
-  module.exports = { obtenerPrestamosPorEmail,PrestamosController };
+
+
+
+
+  module.exports = {
+    ObtenerHistorialPrestamos,
+    // ObtenerPrestamosPorEmail,
+    //getAllPrestamos
+    // ... otras funciones del controlador
+  };

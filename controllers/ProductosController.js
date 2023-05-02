@@ -6,8 +6,9 @@ const ProductosController = {};
 
 ProductosController.getAll = async (req,res) =>{
   let resp = await models.Productos.findAll();
+  console.log('Data sent from controller:', resp);
   res.send(resp);
-}
+};
 
 // ProductosController.createProduct = async (req, res) => {
 //   try {

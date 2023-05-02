@@ -94,7 +94,7 @@ UsuariosController.editarPerfil = async (req, res) => {
   try {
     const { nombre, apellido, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
 
-    const usuario = await Usuarios.findByPk(req.id_usuario);
+    const usuario = await Usuarios.findByPk(req.id);
 
     if (!usuario) {
       return res.status(404).json({
@@ -126,6 +126,34 @@ UsuariosController.editarPerfil = async (req, res) => {
     });
   }
 };
+
+
+
+UsuariosController.getAllPrestamos = async (req, res) => {
+  let resp = await models.Prestamos.findAll();
+  console.log(req)
+  res.send(resp);
+};
+
+
+UsuariosController.getMyPrestamos = async (req, res) => {
+  try {
+    let resp = await models.Prestamos.findAll({
+      where: {
+        usuario_id: req.auth.id,
+        fecha_fin: null,
+      },
+      include: models.Productos,
+    });
+    res.status(200).json({
+      resp,
+      message: "Here are your loans",
+    });
+  } catch (error) {
+    res.json({ message: "There are no loans" });
+  }
+};
+
 
 module.exports = UsuariosController;
 

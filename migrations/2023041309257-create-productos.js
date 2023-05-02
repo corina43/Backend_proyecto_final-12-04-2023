@@ -41,13 +41,8 @@ module.exports = {
       formato: {
         type: Sequelize.ENUM('mp3', 'wav', 'm4a', 'flac', 'aac'),
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+      poster_path: {
+        type: Sequelize.STRING
       },
     });
   },
