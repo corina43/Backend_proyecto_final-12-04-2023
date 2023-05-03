@@ -140,7 +140,7 @@ UsuariosController.getMyPrestamos = async (req, res) => {
   try {
     let resp = await models.Prestamos.findAll({
       where: {
-        usuario_id: req.auth.id,
+        usuario_id: req.auth.id_usuario,
         fecha_fin: null,
       },
       include: models.Productos,
@@ -151,6 +151,26 @@ UsuariosController.getMyPrestamos = async (req, res) => {
     });
   } catch (error) {
     res.json({ message: "There are no loans" });
+  }
+};
+UsuariosController.ObtenerPrestamosPorEmail = async (req, res) => {
+  try {
+    const { email } = req.params;
+    const usuario = await Usuarios.findOne({ where: { email } });
+
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    const prestamos = await Prestamos.findAll({
+      where: { id_usuario: usuario.id },
+      include: [{ model: Productos }],
+    });
+
+    res.status(200).json(prestamos);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error interno del servidor' });
   }
 };
 

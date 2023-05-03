@@ -15,6 +15,7 @@ router.get('/all', verifyToken, isAdmin, UsuariosController.getAll);
 //router.get('/allprestamos', verifyToken, isAdmin, UsuariosController.getAllPrestamos);
 router.get('/prestamos', verifyToken, isAdmin, UsuariosController.getAllPrestamos);
  router.get('/myloans',verifyToken, UsuariosController.getMyPrestamos)
+ router.get('/prestamos/:email',verifyToken, UsuariosController.ObtenerPrestamosPorEmail)
 module.exports = router;
 
 
