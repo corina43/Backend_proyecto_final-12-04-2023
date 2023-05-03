@@ -2,25 +2,6 @@
 const { Prestamos ,Usuarios ,Productos } = require('../models');
 const models = require('../models/index');
 
-//const PrestamosController = {};
-
-
-
-// const ObtenerHistorialPrestamos = async (req, res) => {
-//   const { id_usuario } = req.params;
-//   try {
-//     const historialPrestamos = await Prestamos.findAll({
-//       where: { id_usuario: id_usuario },
-      
-//     });
-//     res.status(200).json({ success: true, data: historialPrestamos });
-//   } catch (error) {
-//     res.status(500).json({ success: false, message: 'Error al obtener el historial de préstamos.'});
-//   }
-// };
-
-
-
   const getPrestamos = async (req, res) => {
   try {
     const userId = req.id;
@@ -53,6 +34,75 @@ const models = require('../models/index');
 };
 
 
+// const getAllPrestamos = async (req, res) => {
+//   try {
+//     const prestamos = await Prestamos.findAll({
+//       include: [{ model: Usuarios }, { model: Productos }]
+//     });
+
+//     res.status(200).json({
+//       success: true,
+//       data: prestamos
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       success: false,
+//       message: 'Error al obtener los préstamos',
+//       error: error.message
+//     });
+//   }
+// };
+
+const createPrestamo = async (req, res) => {
+  try {
+    const userId = req.id;
+    const { id_producto, fecha_inicio, fecha_fin } = req.body;
+
+    const user = await Usuarios.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'El usuario no existe'
+      });
+    }
+
+    const producto = await Productos.findByPk(id_producto);
+
+    if (!producto) {
+      return res.status(404).json({
+        success: false,
+        message: 'El producto no existe'
+      });
+    }
+
+    const prestamo = await Prestamos.create({
+      id_usuario: userId,
+      id_producto,
+      fecha_inicio,
+      fecha_fin
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'Préstamo creado exitosamente',
+      data: prestamo
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Error al crear el préstamo',
+      error: error.message
+    });
+  }
+};
+
+module.exports = {
+ 
+};
+
+
+
 
 
 
@@ -61,6 +111,8 @@ const models = require('../models/index');
 
 
   module.exports = {
-    //ObtenerHistorialPrestamos,
+  
     getPrestamos,
+    // getAllPrestamos,
+    createPrestamo,
   };
