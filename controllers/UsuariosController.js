@@ -127,7 +127,26 @@ UsuariosController.editarPerfil = async (req, res) => {
   }
 };
 
+//los usuarios activos
+UsuariosController.getAllActiveUsers = async (req, res) => {
+  let resp = await models.Usuarios.findAll(
+   { where: {
+      deleted: false,
+      id_usuarios: "2"
+    }}
+  );
+  res.send(resp)
+}
 
+// Los usuarios borrados
+UsuariosController.getAllDeletedUsers = async (req, res) => {
+  let resp = await models.Usuarios.findAll({
+    where: {
+      deleted: true,
+    },
+  });
+  res.send(resp);
+};
 
 UsuariosController.getAllPrestamos = async (req, res) => {
   let resp = await models.Prestamos.findAll();
@@ -135,7 +154,18 @@ UsuariosController.getAllPrestamos = async (req, res) => {
   res.send(resp);
 };
 
-
+// Borrar un usuario - Admin
+UsuariosController.deleteUser = async (req, res) => {
+  const { email } = req.body;
+  let resp = await models.Usuarios.update(
+    { deleted: true },
+    { where: { email: email } }
+  );
+  res.json({
+    resp,
+    message: "Usuario eliminado",
+  });
+};
 
 
 module.exports = UsuariosController;

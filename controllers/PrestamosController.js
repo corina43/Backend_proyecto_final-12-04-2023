@@ -53,10 +53,10 @@ const models = require('../models/index');
 //   }
 // };
 
-const createPrestamo = async (req, res) => {
+const CreatePrestamo = async (req, res) => {
   try {
     const userId = req.id;
-    const { id_producto, fecha_inicio, fecha_fin } = req.body;
+    const { id_producto, fecha_inicio, fecha_fin,puntuacion,comentario_producto } = req.body;
 
     const user = await Usuarios.findByPk(userId);
 
@@ -80,7 +80,9 @@ const createPrestamo = async (req, res) => {
       id_usuario: userId,
       id_producto,
       fecha_inicio,
-      fecha_fin
+      fecha_fin,
+      puntuacion,
+      comentario_producto
     });
 
     res.status(201).json({
@@ -114,5 +116,5 @@ module.exports = {
   
     getPrestamos,
     // getAllPrestamos,
-    createPrestamo,
+    CreatePrestamo,
   };

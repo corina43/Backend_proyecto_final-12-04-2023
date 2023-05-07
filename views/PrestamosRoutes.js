@@ -4,7 +4,7 @@
  const { verifyToken} = require('../middlewares/verifyToken');
  const {isAdmin} = require('../middlewares/isAdmin');
 
- const{createPrestamo} = require('../controllers/PrestamosController');
+ const{CreatePrestamo} = require('../controllers/PrestamosController');
 
  const{getPrestamos} = require('../controllers/PrestamosController')
 
@@ -13,6 +13,6 @@
 
  router.get('/', verifyToken, getPrestamos);
  //router.get('/todoslosprestamos', verifyToken, isAdmin, getAllPrestamos);
- router.post('/crearprestamos', verifyToken, createPrestamo);
+ router.post('/crearprestamos', verifyToken, CreatePrestamo);
 
  module.exports = router;
