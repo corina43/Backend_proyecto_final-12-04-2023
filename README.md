@@ -13,7 +13,7 @@ Cada préstamo solo puede contener unlibro electrónico , además del ID del usu
 
 ---
 
-!['imagen-db'](/img/Screenshot_129.png)
+!['imagen-db'](/images/Screenshot_129.png)
 
 ---
 
