@@ -155,18 +155,37 @@ UsuariosController.getAllPrestamos = async (req, res) => {
 };
 
 // Borrar un usuario - Admin
-UsuariosController.deleteUser = async (req, res) => {
-  const { email } = req.body;
-  let resp = await models.Usuarios.update(
-    { deleted: true },
-    { where: { email: email } }
-  );
-  res.json({
-    resp,
-    message: "Usuario eliminado",
-  });
-};
+// UsuariosController.deleteUser = async (req, res) => {
+//   const { email } = req.body;
+//   let resp = await models.Usuarios.update(
+//     { deleted: true },
+//     { where: { email: email } }
+//   );
+//   res.json({
+//     resp,
+//     message: "Usuario eliminado",
+//   });
+// };
+UsuariosController.eliminarUsuario = async (req, res) => {
+  const { id } = req.params;
 
+  try {
+    // Buscar el usuario por su ID
+    const usuario = await Usuarios.findByPk(id);
+
+    if (!usuario) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    // Eliminar el usuario
+    await usuario.destroy();
+
+    res.status(200).json({ message: 'Usuario eliminado correctamente' });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al eliminar el usuario' });
+  }
+};
 
 module.exports = UsuariosController;
 
