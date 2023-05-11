@@ -33,26 +33,6 @@ const models = require('../models/index');
   }
 };
 
-
-// const getAllPrestamos = async (req, res) => {
-//   try {
-//     const prestamos = await Prestamos.findAll({
-//       include: [{ model: Usuarios }, { model: Productos }]
-//     });
-
-//     res.status(200).json({
-//       success: true,
-//       data: prestamos
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: 'Error al obtener los préstamos',
-//       error: error.message
-//     });
-//   }
-// };
-
 const CreatePrestamo = async (req, res) => {
   try {
     const userId = req.id;

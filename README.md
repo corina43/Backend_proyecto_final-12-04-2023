@@ -44,7 +44,7 @@ Cada préstamo solo puede contener unlibro electrónico , además del ID del usu
 ## Explicación del proyecto CRUD
 
 
-Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistema de autenticación basado en JSON Web Tokens.
+Este proyecto incluye 20 endpoints, tanto públicos como privados, con un sistema de autenticación basado en JSON Web Tokens.
 
 
 ### AuthController
@@ -80,4 +80,10 @@ Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistem
   * updateProduct : Actualiza la información de un producto en particular, según su ID.
   * deleteProduct : Elimina un producto en particular, según su ID.
 
+
   ### PrestamosController
+
+  Estos endpoints permiten obtener los préstamos de un usuario y crear nuevos préstamos asociados a un usuario y un producto.
+
+  * getPrestamos : Devuelve una lista de todos los préstamos asociados a un usuario específico. Esta información incluye los detalles del préstamo y los datos del producto relacionado.
+  * CreatePrestamo : Crea un nuevo préstamo asociado a un usuario y un producto específico. Se proporciona la información necesaria, como el ID del usuario, el ID del producto, las fechas de inicio y fin del préstamo, la puntuación y los comentarios del producto.
