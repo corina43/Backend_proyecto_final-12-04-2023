@@ -154,18 +154,7 @@ UsuariosController.getAllPrestamos = async (req, res) => {
   res.send(resp);
 };
 
-// Borrar un usuario - Admin
-// UsuariosController.deleteUser = async (req, res) => {
-//   const { email } = req.body;
-//   let resp = await models.Usuarios.update(
-//     { deleted: true },
-//     { where: { email: email } }
-//   );
-//   res.json({
-//     resp,
-//     message: "Usuario eliminado",
-//   });
-// };
+
 UsuariosController.EliminarUsuario = async (req, res) => {
   const { id } = req.params;
 

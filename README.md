@@ -50,6 +50,21 @@ Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistem
 ### AuthController
 
 
-* ** POST /registro: Permite a un usuario registrarse en el sistema. Se validan los campos obligatorios y se crea un nuevo usuario en la base de datos.
+*  POST /registro: Permite a un usuario registrarse en el sistema. Se validan los campos obligatorios y se crea un nuevo usuario en la base de datos.
 
- * **POST /login: Permite a un usuario iniciar sesión. Se verifica la existencia del usuario y la coincidencia de las credenciales proporcionadas. Se genera un token JWT para la autenticación.
+ * POST /login: Permite a un usuario iniciar sesión. Se verifica la existencia del usuario y la coincidencia de las credenciales proporcionadas. Se genera un token JWT para la autenticación.
+
+ ### UsuariosController
+
+  # En general, estos endpoints se utilizan para obtener, actualizar y eliminar información de los usuarios.
+
+
+ * getAll : Devuelve una lista de todos los usuarios registrados.
+ * verUsuarios: Devuelve una lista de todos los usuarios registrados, junto con un mensaje de éxito o error.
+  * verUsuariosPerfil : Devuelve la información de un usuario en particular, según su ID.
+  * getInformation : Devuelve la información de un usuario en particular, según su correo electrónico.
+  * editarPerfil : Actualiza la información de un usuario en particular, según su ID.
+   * getAllActiveUsers : Devuelve una lista de todos los usuarios activos.
+   * getAllDeletedUsers : Devuelve una lista de todos los usuarios eliminados.
+   * getAllPrestamos : Devuelve una lista de todos los préstamos registrados.
+   * EliminarUsuario : Elimina un usuario en particular, según su ID. 
