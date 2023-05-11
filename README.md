@@ -103,14 +103,19 @@ Contiene todas las funciones responsables de devolver una respuesta al usuario.
   * ProductosController.js > CRUD de productos
   * UsuariosControllers.js > obtener y actualizar información de usuario, eliminar información de usuario para administradores
   * db
+
 Acceso a la base de datos.
+
   * middlewares
+
 Gestiona los tokens para la autenticación y autorización de usuarios en la página, autenticación de admin mediante isAdmin.
+
   * migrations
+
 Archivos que permiten realizar una migración completa de la base de datos.
   * models
-index.js > gestiona todos los modelos y se conecta a la base de datos
-prestamos.js > información y estructura de la tabla de préstamos
+*index.js > gestiona todos los modelos y se conecta a la base de datos
+*prestamos.js > información y estructura de la tabla de préstamos
 productos.js > información y estructura de la tabla de productos
 roles.js > información sobre los roles disponibles para los usuarios
 usuarios.js > información y estructura de la tabla que almacena todos los usuarios registrados en nuestro sitio web
@@ -118,15 +123,15 @@ usuarios.js > información y estructura de la tabla que almacena todos los usuar
 Carpeta que contiene todos los archivos que NodeJS y sus dependencias necesitan para ejecutarse.
   * seeders
 Archivos con todos los productos y prestamos disponibles en la base de datos.
-services
+  * services
 Funciones utilizadas por los controladores para ejecutar la lógica necesaria para proporcionar la respuesta adecuada al usuario.
-views
+  * views
 Archivos con las rutas individuales para cada punto final.
-.env
+  * .env
 Archivo con el secreto del JSON Web Token y la información necesaria para conectarse a la base de datos.
-app.js
+  * app.js
 Archivo principal donde llamamos e instanciamos Express y hacemos que la aplicación escuche en el puerto que elegimos para nuestro entorno local.
-package.json
+  * package.json
 Archivo con información sobre el proyecto Node, dependencias y metadatos.
-router.js
+  * router.js
 Archivo con rutas generales para cada modelo.
