@@ -41,3 +41,15 @@ Cada préstamo solo puede contener unlibro electrónico , además del ID del usu
 !['imagen-db'](/images/ezgif-1-832880d820.gif)
 
 ---
+## Explicación del proyecto CRUD
+
+
+Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistema de autenticación basado en JSON Web Tokens.
+
+
+### AuthController
+
+
+* ** POST /registro: Permite a un usuario registrarse en el sistema. Se validan los campos obligatorios y se crea un nuevo usuario en la base de datos.
+
+ * **POST /login: Permite a un usuario iniciar sesión. Se verifica la existencia del usuario y la coincidencia de las credenciales proporcionadas. Se genera un token JWT para la autenticación.
