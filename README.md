@@ -69,13 +69,15 @@ Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistem
    * getAllPrestamos : Devuelve una lista de todos los préstamos registrados.
    * EliminarUsuario : Elimina un usuario en particular, según su ID. 
 
-    ### ProductosController
+### ProductosController
 
-* Estos endpoints permiten obtener, filtrar, actualizar y eliminar información de los productos.
+ Estos endpoints permiten obtener, filtrar, actualizar y eliminar información de los productos.
 
-    * getAll : Devuelve una lista de todos los productos registrados.
-    * getByGenero : Devuelve una lista de productos filtrados por género.
-    * getByTitulo : Devuelve una lista de productos filtrados por título.
-    * getProductById : Devuelve la información de un producto en particular, según su ID.
-    * updateProduct : Actualiza la información de un producto en particular, según su ID.
-    * deleteProduct : Elimina un producto en particular, según su ID.
+  * getAll : Devuelve una lista de todos los productos registrados.
+  * getByGenero : Devuelve una lista de productos filtrados por género.
+  * getByTitulo : Devuelve una lista de productos filtrados por título.
+  * getProductById : Devuelve la información de un producto en particular, según su ID.
+  * updateProduct : Actualiza la información de un producto en particular, según su ID.
+  * deleteProduct : Elimina un producto en particular, según su ID.
+
+  ### PrestamosController
