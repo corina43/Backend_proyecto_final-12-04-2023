@@ -114,11 +114,12 @@ Gestiona los tokens para la autenticación y autorización de usuarios en la pá
 
 Archivos que permiten realizar una migración completa de la base de datos.
   * models
-*index.js > gestiona todos los modelos y se conecta a la base de datos
-*prestamos.js > información y estructura de la tabla de préstamos
-productos.js > información y estructura de la tabla de productos
-roles.js > información sobre los roles disponibles para los usuarios
-usuarios.js > información y estructura de la tabla que almacena todos los usuarios registrados en nuestro sitio web
+      * index.js > gestiona todos los modelos y se conecta a la base de datos
+      * prestamos.js > información y estructura de la tabla de préstamos
+      * productos.js > información y estructura de la tabla de productos
+      * roles.js > información sobre los roles disponibles para los usuarios
+      * usuarios.js > información y estructura de la tabla que almacena todos los 
+      * usuarios registrados en nuestro sitio web
   * node_modules
 Carpeta que contiene todos los archivos que NodeJS y sus dependencias necesitan para ejecutarse.
   * seeders
