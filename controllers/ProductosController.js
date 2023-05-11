@@ -10,35 +10,7 @@ ProductosController.getAll = async (req,res) =>{
   res.send(resp);
 };
 
-// ProductosController.createProduct = async (req, res) => {
-//   try {
-//     const { titulo, autor, descripcion, fecha_publicacion, tipo, categoria, genero, duracion, formato } = req.body;
 
-//     const newProduct = await Productos.create({
-//       titulo,
-//       autor,
-//       descripcion,
-//       fecha_publicacion,
-//       tipo,
-//       categoria,
-//       genero,
-//       duracion,
-//       formato,
-//     });
-
-//     return res.json({
-//       success: true,
-//       message: 'Producto creado',
-//       data: newProduct,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: 'Algo salió mal',
-//       error: error.message,
-//     });
-//   }
-// };
 ProductosController.getByGenero = async (req, res) => {
   let genero = req.params.genero;
   let resp = await models.Productos.findAll({

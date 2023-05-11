@@ -56,7 +56,7 @@ Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistem
 
  ### UsuariosController
 
-  # En general, estos endpoints se utilizan para obtener, actualizar y eliminar información de los usuarios.
+  * En general, estos endpoints se utilizan para obtener, actualizar y eliminar información de los usuarios.
 
 
  * getAll : Devuelve una lista de todos los usuarios registrados.
@@ -68,3 +68,14 @@ Este proyecto incluye 23 endpoints, tanto públicos como privados, con un sistem
    * getAllDeletedUsers : Devuelve una lista de todos los usuarios eliminados.
    * getAllPrestamos : Devuelve una lista de todos los préstamos registrados.
    * EliminarUsuario : Elimina un usuario en particular, según su ID. 
+
+    ### ProductosController
+
+* Estos endpoints permiten obtener, filtrar, actualizar y eliminar información de los productos.
+
+    * getAll : Devuelve una lista de todos los productos registrados.
+    * getByGenero : Devuelve una lista de productos filtrados por género.
+    * getByTitulo : Devuelve una lista de productos filtrados por título.
+    * getProductById : Devuelve la información de un producto en particular, según su ID.
+    * updateProduct : Actualiza la información de un producto en particular, según su ID.
+    * deleteProduct : Elimina un producto en particular, según su ID.
