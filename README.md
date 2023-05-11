@@ -89,3 +89,44 @@ Este proyecto incluye 20 endpoints, tanto públicos como privados, con un sistem
 
   * getPrestamos : Devuelve una lista de todos los préstamos asociados a un usuario específico. Esta información incluye los detalles del préstamo y los datos del producto relacionado.
   * CreatePrestamo : Crea un nuevo préstamo asociado a un usuario y un producto específico. Se proporciona la información necesaria, como el ID del usuario, el ID del producto, las fechas de inicio y fin del préstamo, la puntuación y los comentarios del producto.
+
+
+  ### Estructura del proyecto
+El proyecto está dividido en carpetas y archivos de la siguiente manera:
+
+  * config
+Contiene la información de conexión a la base de datos. No se encuentra en el repositorio.
+  * controllers
+Contiene todas las funciones responsables de devolver una respuesta al usuario.
+  * AuthController.js > para iniciar sesión y registrar nuevos usuarios.
+  * Prestam0sController.js > CRUD de préstamos
+  * ProductosController.js > CRUD de productos
+  * UsuariosControllers.js > obtener y actualizar información de usuario, eliminar información de usuario para administradores
+  * db
+Acceso a la base de datos.
+  * middlewares
+Gestiona los tokens para la autenticación y autorización de usuarios en la página, autenticación de admin mediante isAdmin.
+  * migrations
+Archivos que permiten realizar una migración completa de la base de datos.
+  * models
+index.js > gestiona todos los modelos y se conecta a la base de datos
+prestamos.js > información y estructura de la tabla de préstamos
+productos.js > información y estructura de la tabla de productos
+roles.js > información sobre los roles disponibles para los usuarios
+usuarios.js > información y estructura de la tabla que almacena todos los usuarios registrados en nuestro sitio web
+  * node_modules
+Carpeta que contiene todos los archivos que NodeJS y sus dependencias necesitan para ejecutarse.
+  * seeders
+Archivos con todos los productos y prestamos disponibles en la base de datos.
+services
+Funciones utilizadas por los controladores para ejecutar la lógica necesaria para proporcionar la respuesta adecuada al usuario.
+views
+Archivos con las rutas individuales para cada punto final.
+.env
+Archivo con el secreto del JSON Web Token y la información necesaria para conectarse a la base de datos.
+app.js
+Archivo principal donde llamamos e instanciamos Express y hacemos que la aplicación escuche en el puerto que elegimos para nuestro entorno local.
+package.json
+Archivo con información sobre el proyecto Node, dependencias y metadatos.
+router.js
+Archivo con rutas generales para cada modelo.
