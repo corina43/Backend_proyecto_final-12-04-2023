@@ -21,7 +21,7 @@ router.get('/activos', isAdmin, UsuariosController.getAllActiveUsers)
 router.get('/usuariosdelete', isAdmin, UsuariosController.getAllDeletedUsers)
 
 // Borrar usuarios - ADMIN ONLY
-router.delete('/delete/:id', verifyToken,isAdmin, UsuariosController.eliminarUsuario);
+router.delete('/delete/:id', verifyToken,isAdmin, UsuariosController.EliminarUsuario);
 
 module.exports = router;
 

@@ -166,7 +166,7 @@ UsuariosController.getAllPrestamos = async (req, res) => {
 //     message: "Usuario eliminado",
 //   });
 // };
-UsuariosController.eliminarUsuario = async (req, res) => {
+UsuariosController.EliminarUsuario = async (req, res) => {
   const { id } = req.params;
 
   try {

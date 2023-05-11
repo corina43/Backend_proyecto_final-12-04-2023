@@ -38,54 +38,6 @@ Cada préstamo solo puede contener unlibro electrónico , además del ID del usu
 
 ---
 
-<details>
-<summary>Endpoints</summary>
+!['imagen-db'](/images/ezgif-1-832880d820.gif)
 
-- AUTH
-    - createUserProfile
-
-            POST localhost:3009/auth/register
-        body:
-        ``` js
-            {
-        "nombre": "Corina",
-        "apellido": "Ciorpac",
-        "email": "corina@example.com",
-        "fecha_registro": "2023-04-30T13:10:23.000Z",
-        "fecha_nacimiento": "1985-03-12T00:00:00.000Z",
-        "ciudad": "Bucarest",
-        "pais": "Rumania",
-        "generos_preferidos": "Literatura Clásica, Poesía",
-        "biografia": "Administradora de la plataforma y amante de la lectura."
-            }
-        ```
-
-    - UserLogin
-
-            POST localhost:3000/auth/login
-        body:
-        ``` js
-            {
-                    
-           "email": "corina@example.com",
-            "password": "corina123"
-
-
-            }
-        ```
-- USuarios
-    - getUserProfile  
-
-            GET localhost:30009/usuarios/profile
-             body:
-        ``` js
-            {
-                    
-           "email": "corina@example.com",
-            "password": "corina123"
-
-
-            }
-        ```
-
-  
+---
