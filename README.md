@@ -1,8 +1,10 @@
 # Backend_proyecto_final-12-04-2023
 
-# E_Books API project
+<em> # Bienvenido a la aplicación Backend Api E_books</em>
 
-## Back-end project for GeeksHubs Academy
+
+
+![image](https://user-images.githubusercontent.com/113507322/205169800-ae8aeff3-2afc-467c-8c53-6c1637671770.png)
 
 
 Los requisitos funcionales del proyecto requieren una base de datos capaz de contener varios productos(libros), usuarios con roles distintos y los préstamos realizados por los usuarios.
