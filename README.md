@@ -1,5 +1,7 @@
 # Backend_proyecto_final-12-04-2023
-
+<p align="left">
+   <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+   </p>
 <em> # Bienvenido a la aplicación Backend Api E_books</em>
 
 
@@ -9,7 +11,7 @@
 
 Los requisitos funcionales del proyecto requieren una base de datos capaz de contener varios productos(libros), usuarios con roles distintos y los préstamos realizados por los usuarios.
 
-Cada préstamo solo puede contener unlibro electrónico , además del ID del usuario que realiza el préstamo y las fechas de inicio y finalización de esa transacción.
+Cada préstamo solo puede contener un libro electrónico , además del ID del usuario que realiza el préstamo y las fechas de inicio y finalización de esa transacción.
 
  ## Diagrama BD // Database diagram
 
@@ -119,20 +121,20 @@ Archivos que permiten realizar una migración completa de la base de datos.
       * productos.js > información y estructura de la tabla de productos
       * roles.js > información sobre los roles disponibles para los usuarios
       * usuarios.js > información y estructura de la tabla que almacena todos los 
-      * usuarios registrados en nuestro sitio web
+ usuarios registrados en nuestro sitio web
   * node_modules
-Carpeta que contiene todos los archivos que NodeJS y sus dependencias necesitan para ejecutarse.
+      * Carpeta que contiene todos los archivos que NodeJS y sus dependencias necesitan para ejecutarse.
   * seeders
-Archivos con todos los productos y prestamos disponibles en la base de datos.
+      * Archivos con todos los productos y prestamos disponibles en la base de datos.
   * services
-Funciones utilizadas por los controladores para ejecutar la lógica necesaria para proporcionar la respuesta adecuada al usuario.
+      * Funciones utilizadas por los controladores para ejecutar la lógica necesaria para proporcionar la respuesta adecuada al usuario.
   * views
-Archivos con las rutas individuales para cada punto final.
+      * Archivos con las rutas individuales para cada punto final.
   * .env
-Archivo con el secreto del JSON Web Token y la información necesaria para conectarse a la base de datos.
+      * Archivo con el secreto del JSON Web Token y la información necesaria para conectarse a la base de datos.
   * app.js
-Archivo principal donde llamamos e instanciamos Express y hacemos que la aplicación escuche en el puerto que elegimos para nuestro entorno local.
+      * Archivo principal donde llamamos e instanciamos Express y hacemos que la aplicación escuche en el puerto que elegimos para nuestro entorno local.
   * package.json
-Archivo con información sobre el proyecto Node, dependencias y metadatos.
+       * Archivo con información sobre el proyecto Node, dependencias y metadatos.
   * router.js
-Archivo con rutas generales para cada modelo.
+       * Archivo con rutas generales para cada modelo.
