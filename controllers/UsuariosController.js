@@ -92,7 +92,7 @@ UsuariosController.getInformation = async (req,res) => {
 
 UsuariosController.editarPerfil = async (req, res) => {
   try {
-    const { nombre, apellido, fecha_nacimiento, ciudad, pais, generos_preferidos, biografia } = req.body;
+    const { nombre, apellido, fecha_nacimiento,fecha_registro, ciudad, pais, generos_preferidos, biografia } = req.body;
 
     const usuario = await Usuarios.findByPk(req.id);
 
@@ -107,6 +107,7 @@ UsuariosController.editarPerfil = async (req, res) => {
       nombre: nombre || usuario.nombre,
       apellido: apellido || usuario.apellido,
       fecha_nacimiento: fecha_nacimiento || usuario.fecha_nacimiento,
+      fecha_registro: fecha_registro || usuario.fecha_registro,
       ciudad: ciudad || usuario.ciudad,
       pais: pais || usuario.pais,
       generos_preferidos: generos_preferidos || usuario.generos_preferidos,

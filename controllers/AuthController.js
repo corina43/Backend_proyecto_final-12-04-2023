@@ -32,7 +32,7 @@ AuthController.createUserProfile = async (req, res) => {
             nombre: nombre,
             apellido: apellido,
             email: email,
-            password: password,
+            password: encryptedPassword,
             fecha_nacimiento: fecha_nacimiento,
             fecha_registro: fecha_registro,
             ciudad: ciudad,
