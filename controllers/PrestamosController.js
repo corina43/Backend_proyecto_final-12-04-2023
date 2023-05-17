@@ -79,9 +79,7 @@ const CreatePrestamo = async (req, res) => {
   }
 };
 
-module.exports = {
- 
-};
+
 
 
 
@@ -95,6 +93,6 @@ module.exports = {
   module.exports = {
   
     getPrestamos,
-    // getAllPrestamos,
+   
     CreatePrestamo,
   };

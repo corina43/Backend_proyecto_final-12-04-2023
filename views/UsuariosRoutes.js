@@ -9,7 +9,7 @@ const isAdmin = require('../middlewares/isAdmin');
 
 
 router.get('/profile', verifyToken, UsuariosController.verUsuariosPerfil);
-router.put('/perfil', verifyToken, UsuariosController.editarPerfil);
+router.patch('/perfil', verifyToken, UsuariosController.editarPerfil);
 router.get('/todos', verifyToken, isAdmin, UsuariosController.verUsuarios);
 router.get('/all', verifyToken, isAdmin, UsuariosController.getAll);
 router.get('/allprestamos', verifyToken, isAdmin, UsuariosController.getAllPrestamos);

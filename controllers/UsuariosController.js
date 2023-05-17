@@ -158,7 +158,7 @@ UsuariosController.getAllPrestamos = async (req, res) => {
 
 UsuariosController.EliminarUsuario = async (req, res) => {
   const { id } = req.params;
-
+console.log(req.params,'hhhhhhhhhh')
   try {
     // Buscar el usuario por su ID
     const usuario = await Usuarios.findByPk(id);

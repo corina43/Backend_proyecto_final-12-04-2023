@@ -41,6 +41,48 @@ res.send(resp);
 };
 
 
+
+
+
+// Endpoint para crear un nuevo producto
+ProductosController.crearProducto = async (req, res) => {
+  try {
+    // Obtener los datos del producto del cuerpo de la solicitud
+    const { titulo, autor, descripcion, fecha_publicacion, tipo, categoria, genero, duracion, formato, poster_path } = req.body;
+
+    // Crear el nuevo producto en la base de datos
+    const nuevoProducto = await Productos.create({
+      titulo,
+      autor,
+      descripcion,
+      fecha_publicacion,
+      tipo,
+      categoria,
+      genero,
+      duracion,
+      formato,
+      poster_path,
+    });
+
+    // Enviar una respuesta con el nuevo producto creado
+    res.status(201).json({
+      mensaje: 'Producto creado exitosamente',
+      producto: nuevoProducto,
+    });
+  } catch (error) {
+    // Manejar errores
+    console.error('Error al crear el producto:', error);
+    res.status(500).json({
+      mensaje: 'Ocurrió un error al crear el producto',
+      error: error.message,
+    });
+  }
+}
+
+
+
+
+
 ProductosController.updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
