@@ -90,7 +90,7 @@ UsuariosController.getInformation = async (req,res) => {
   res.send(resp)
 };
 
-UsuariosController.editarPerfil = async (req, res) => {
+UsuariosController.EditarPerfil = async (req, res) => {
   try {
     const { nombre, apellido, fecha_nacimiento,fecha_registro, ciudad, pais, generos_preferidos, biografia } = req.body;
 

@@ -1,6 +1,7 @@
 
 const { Prestamos ,Usuarios ,Productos } = require('../models');
 const models = require('../models/index');
+const { getByTitulo } = require('./ProductosController');
 
   const getPrestamos = async (req, res) => {
   try {
@@ -33,10 +34,13 @@ const models = require('../models/index');
   }
 };
 
+
+
+
 const CreatePrestamo = async (req, res) => {
   try {
     const userId = req.id;
-    const { id_producto, fecha_inicio, fecha_fin,puntuacion,comentario_producto } = req.body;
+    const { titulo, fecha_inicio, fecha_fin, puntuacion, comentario_producto } = req.body;
 
     const user = await Usuarios.findByPk(userId);
 
@@ -47,7 +51,7 @@ const CreatePrestamo = async (req, res) => {
       });
     }
 
-    const producto = await Productos.findByPk(id_producto);
+    const producto = await Productos.findOne({ where: { titulo: titulo } });
 
     if (!producto) {
       return res.status(404).json({
@@ -58,7 +62,7 @@ const CreatePrestamo = async (req, res) => {
 
     const prestamo = await Prestamos.create({
       id_usuario: userId,
-      id_producto,
+      id_producto: producto.id, // Se asume que el modelo Prestamos tiene una columna llamada "id_producto" para almacenar el ID del producto
       fecha_inicio,
       fecha_fin,
       puntuacion,
@@ -78,9 +82,6 @@ const CreatePrestamo = async (req, res) => {
     });
   }
 };
-
-
-
 
 
 

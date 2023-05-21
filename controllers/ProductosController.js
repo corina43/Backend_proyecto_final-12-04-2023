@@ -32,6 +32,16 @@ ProductosController.getByTitulo = async (req, res) => {
   res.send(resp);
 };
 
+ProductosController.getByAutor = async (req, res) => {
+  let autor = req.params.autor;
+  let resp = await models.Productos.findAll({
+ 
+    where: { autor: autor }
+  })
+  // console.log(res,req)
+  res.send(resp);
+};
+
 ProductosController.getProductById = async (req, res) => {
 let id = req.params.id;
 let resp = await models.Productos.findAll({
@@ -48,7 +58,7 @@ res.send(resp);
 ProductosController.crearProducto = async (req, res) => {
   try {
     // Obtener los datos del producto del cuerpo de la solicitud
-    const { titulo, autor, descripcion, fecha_publicacion, tipo, categoria, genero, duracion, formato, poster_path } = req.body;
+    const { titulo, autor, descripcion, fecha_publicacion, tipo, categoria, genero, poster_path } = req.body;
 
     // Crear el nuevo producto en la base de datos
     const nuevoProducto = await Productos.create({
@@ -59,8 +69,6 @@ ProductosController.crearProducto = async (req, res) => {
       tipo,
       categoria,
       genero,
-      duracion,
-      formato,
       poster_path,
     });
 
@@ -86,7 +94,7 @@ ProductosController.crearProducto = async (req, res) => {
 ProductosController.updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const { titulo, autor, descripcion, fecha_publicacion, tipo, categoria, genero, duracion, formato } = req.body;
+    const { titulo, autor, descripcion, fecha_publicacion, tipo, categoria, genero } = req.body;
 
     const product = await Productos.findByPk(id);
 
@@ -105,8 +113,7 @@ ProductosController.updateProduct = async (req, res) => {
       tipo,
       categoria,
       genero,
-      duracion,
-      formato,
+     
     });
 
     return res.json({
